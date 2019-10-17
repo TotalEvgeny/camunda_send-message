@@ -1,6 +1,7 @@
 # camunda_send-message
 
-![alt text](http://srv-gitlab-01.e-lab.icl.kazan.ru/Evgeny.Voloczkoy/camunda/blob/master/src/main/resources/bpmn/acceptanceApplication.png)
+![Alt text](/src/main/resources/bpmn/acceptanceApplication.png)
+![Alt text](src/main/resources/bpmn/ApproveAcc.png)
 
 UseFull
 * Spring BOOT  
