@@ -1,6 +1,7 @@
 # camunda_send-message
 
-## see [wiki](http://srv-gitlab-01.e-lab.icl.kazan.ru/Evgeny.Voloczkoy/camunda/wikis/home)
+![alt text](http://srv-gitlab-01.e-lab.icl.kazan.ru/Evgeny.Voloczkoy/camunda/blob/master/src/main/resources/bpmn/acceptanceApplication.png)
+
 UseFull
 * Spring BOOT  
 *  Maven
