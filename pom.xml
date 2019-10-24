@@ -17,7 +17,7 @@
 	<properties>
 		<java.version>1.8</java.version>
 		<kotlin.version>1.2.71</kotlin.version>
-		<camunda.version>7.11.0</camunda.version>
+		<camunda.version>7.10.0</camunda.version>
 	</properties>
 
 	<dependencyManagement>
@@ -46,19 +46,20 @@
 			<artifactId>javax.mail</artifactId>
 			<version>1.5.5</version>
 		</dependency>
-
+		<dependency>
+			<groupId>org.camunda.template-engines</groupId>
+			<artifactId>camunda-template-engines-freemarker</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+			<version>2.6</version>
+		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
 			<version>1.7.21</version>
-		</dependency>
-		<dependency>
-			<groupId>org.camunda.connect</groupId>
-			<artifactId>camunda-connect-bom</artifactId>
-			<scope>import</scope>
-			<type>pom</type>
-			<version>${version.connect}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.camunda.connect</groupId>
