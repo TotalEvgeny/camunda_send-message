@@ -40,6 +40,7 @@
           <camunda:formField id="ID" type="long" />
           <camunda:formField id="Comment" type="string" />
         </camunda:formData>
+        <camunda:taskListener delegateExpression="${SetAssign}" event="create" />
       </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_1ajn9dz</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0f3o0ck</bpmn:outgoing>
