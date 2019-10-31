@@ -1,6 +1,7 @@
 # camunda_send-message
 
-![Alt text](/src/main/resources/bpmn/acceptanceApplication.png)
+![Alt text](src/main/resources/bpmn/acceptanceApplication.png)
+
 ![Alt text](src/main/resources/bpmn/ApproveAcc.png)
 
 UseFull
@@ -20,3 +21,14 @@ rs.createMessageCorrelation("WaitAcceptance")
 .setVariable("acceptanceResult", it.acceptanceResult)
 .setVariable("Comment", it.comment)
 .correlate()`
+
+### Rights
+###### set in application.properties
+# `camunda.bpm.authorization.enabled=true` 
+
+- При назначении задачи на пользователя или группы выдаются права на
+ создание и изменение. См. раздел Авторизации. Например, можно
+ настроить критерии задач, которые видны в Task и другой пользователь
+ не сможет выполнить задачу, назначенную на ту же группу, но
+ находящуюся в работе
+- Через интерфейс можно забирать права. Можно попробовать забирать права кодом.
