@@ -1,21 +1,14 @@
 package com.bpmn2.camunda.delegate
 
-import com.bpmn2.camunda.model.application
-import org.camunda.bpm.engine.ProcessEngine
+import com.bpmn2.camunda.service.camunda.RequestService
 import org.camunda.bpm.engine.ProcessEngineServices
-import org.camunda.bpm.engine.RuntimeService
 import org.camunda.bpm.engine.delegate.DelegateExecution
 import org.camunda.bpm.engine.delegate.DelegateTask
-import org.camunda.bpm.engine.delegate.JavaDelegate
 import org.camunda.bpm.engine.delegate.TaskListener
 import org.camunda.bpm.engine.identity.GroupQuery
 import org.camunda.bpm.engine.runtime.Execution
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
-import java.util.*
-import org.springframework.dao.support.DataAccessUtils.singleResult
-import org.camunda.bpm.engine.impl.context.Context.getProcessEngineConfiguration
-import org.camunda.bpm.engine.IdentityService
 import org.camunda.bpm.engine.impl.context.Context;
 
 
@@ -36,12 +29,24 @@ class SetAssign : TaskListener {
 //        rs.set
     }
 
+    @Autowired
+    private val requestService: RequestService? = null
+
     override fun notify(delegateTask: DelegateTask) {
         var assignGroup = delegateTask.execution.processEngineServices.identityService.createGroupQuery() as GroupQuery
         delegateTask.addCandidateGroup("support")
 
         val identityService = Context.getProcessEngineConfiguration().getIdentityService()
         val user = identityService.createUserQuery().userId("demo").singleResult()
+
+        delegateTask.setVariableLocal("name", "123") //only in this task
+
+        //data from DB
+        var listRequest = requestService?.findAll();
+        var nameFirstRequest = listRequest?.first()?.name
+        var idRequest = listRequest?.first()?.id
+        delegateTask.setVariable("Description", nameFirstRequest)
+        delegateTask.setVariable("Comment", idRequest)
     }
 
 }

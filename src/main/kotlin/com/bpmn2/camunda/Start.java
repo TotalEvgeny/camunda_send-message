@@ -20,6 +20,14 @@ import java.io.File;
 import java.net.URISyntaxException;
 import java.net.URL;
 
+import com.bpmn2.camunda.entity.camunda.Account;
+import com.bpmn2.camunda.entity.camunda.Request;
+import com.bpmn2.camunda.entity.usersmanagement.Address;
+import com.bpmn2.camunda.entity.usersmanagement.Users;
+import com.bpmn2.camunda.service.camunda.AccountService;
+import com.bpmn2.camunda.service.camunda.RequestService;
+import com.bpmn2.camunda.service.usersmanagement.AddressService;
+import com.bpmn2.camunda.service.usersmanagement.UserService;
 import org.camunda.bpm.engine.RuntimeService;
 import org.camunda.bpm.spring.boot.starter.annotation.EnableProcessApplication;
 import org.camunda.bpm.spring.boot.starter.event.PostDeployEvent;
@@ -34,6 +42,7 @@ import org.camunda.bpm.extension.mail.notification.MailNotificationService;
 import org.camunda.bpm.extension.mail.service.MailService;
 import org.camunda.bpm.extension.mail.service.MailServiceFactory;
 import org.camunda.bpm.engine.variable.Variables;
+
 
 @SpringBootApplication
 @EnableProcessApplication
@@ -60,6 +69,61 @@ public class Start {
                             .putValue("invoice", getInvoicePath()));
         });
         notificationService.start();
+
+        //Service JPA work with tables in this and other db
+//        CallMethodJPA();
+//        CallUsersManagementMethodJPA();
+    }
+
+    @Autowired
+    private AccountService accountService;
+
+    @Autowired
+    private RequestService requestService;
+
+    @Autowired
+    private AddressService addressService;
+
+    @Autowired
+    private UserService userService;
+
+    protected void CallMethodJPA(){
+        Account account = new Account();
+        account.setName("Ромашка");
+        accountService.createAccount(account);
+//        Account account = accountService.findById(UUID.fromString("72d131c9-7af4-4aa2-a981-637369822a46"));
+        Request request = new Request();
+        request.setAccount(account);
+        request.setName("Заявка 1");
+        requestService.createRequest(request);
+    }
+
+    protected void CallUsersManagementMethodJPA(){
+        Address address = new Address();
+        address.setCity("Kiev");
+        address.setHomeNumber("4");
+        address.setStreet("Main Street");
+        Address address1 = new Address();
+        address1.setCity("Lviv");
+        Users users = new Users();
+        users.setAddress(address);
+        users.setEmail("someEmail@gmail.com");
+        users.setName("Smith");
+        userService.createUsers(users);
+        Users users1 = new Users();
+        users1.setName("Jon Dorian");
+        users1.setEmail("gmailEmail@gmail.com");
+        users1.setAddress(address1);
+        userService.createUsers(users1);
+        userService.removeUsers(users1);
+
+        userService.findAll().forEach(it-> System.out.println(it));
+
+        userService.findAllByName("Smith").forEach(it-> System.out.println(it));
+
+        userService.findWhereEmailIsGmail().forEach(it-> System.out.println(it));
+
+        userService.findWhereNameStartsFromSmith().forEach(it-> System.out.println(it));
     }
 
     @EventListener

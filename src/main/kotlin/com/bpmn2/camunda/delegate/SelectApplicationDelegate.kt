@@ -19,9 +19,9 @@ class SelectApplicationDelegate : JavaDelegate {
         var processInstancesList = rs.createProcessInstanceQuery().active().processDefinitionKey("ApplicationApprove").list()
         var applications = ArrayList<application>()
         processInstancesList.forEach() {
-            var amountFromProcess = rs.createVariableInstanceQuery().activityInstanceIdIn(it.id).variableName("Amount").singleResult().value as Long
-            var idFromProcess = rs.createVariableInstanceQuery().activityInstanceIdIn(it.id).variableName("ID").singleResult().value as Long
-            var descriptionFromProcess = rs.createVariableInstanceQuery().activityInstanceIdIn(it.id).variableName("Description").singleResult().value as String
+            var amountFromProcess = rs.createVariableInstanceQuery().activityInstanceIdIn(it.id).variableName("Amount").singleResult()?.value as Long?
+            var idFromProcess = rs.createVariableInstanceQuery().activityInstanceIdIn(it.id).variableName("ID").singleResult()?.value as Long?
+            var descriptionFromProcess = rs.createVariableInstanceQuery().activityInstanceIdIn(it.id).variableName("Description").singleResult()?.value as String?
             var processId = it.id
 
 

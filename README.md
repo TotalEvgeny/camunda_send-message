@@ -32,3 +32,8 @@ rs.createMessageCorrelation("WaitAcceptance")
  не сможет выполнить задачу, назначенную на ту же группу, но
  находящуюся в работе
 - Через интерфейс можно забирать права. Можно попробовать забирать права кодом.
+
+### Use Multiple DB
+- The project has a config in which the connection to different
+  databases(postgres) is configured, including camunda db, using @bean
+  in code. Work with the database goes through Hibernate + JPA
